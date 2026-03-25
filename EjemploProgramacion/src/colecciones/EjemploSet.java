@@ -22,6 +22,7 @@ public class EjemploSet {
         conjuntoNombres.add("Javier");
         conjuntoNombres.add("Lolo");
         conjuntoNombres.add("Javier");
+        conjuntoNombres.add("Javier");
         conjuntoNombres.add("Lali");
 
         System.out.println("Tamaño del conjunto de nombres: " + conjuntoNombres.size());
