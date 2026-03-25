@@ -1,5 +1,7 @@
 package colecciones.Spotify;
 
+import java.util.Objects;
+
 public class Cancion {
     private String nombre;
     private int numSegundos;
@@ -58,5 +60,17 @@ public class Cancion {
 
     public void setTieneLetra(boolean tieneLetra) {
         this.tieneLetra = tieneLetra;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Cancion cancion = (Cancion) o;
+        return Objects.equals(nombre, cancion.nombre);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(nombre);
     }
 }
