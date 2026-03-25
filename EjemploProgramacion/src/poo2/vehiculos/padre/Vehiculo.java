@@ -1,0 +1,29 @@
+package poo2.vehiculos.padre;
+
+public abstract class Vehiculo {
+    protected String matricula;
+    protected String modelo;
+
+    public Vehiculo(String matricula, String modelo) {
+        this.matricula = matricula;
+        this.modelo = modelo;
+    }
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public abstract void imprimir();
+
+    @Override
+    public String toString() {
+        return "Vehiculo{" +
+                "matricula='" + matricula + '\'' +
+                ", modelo='" + modelo + '\'' +
+                '}';
+    }
+}

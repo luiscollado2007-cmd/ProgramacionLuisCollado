@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="GuessNumber">
+    <output-path>$PROJECT_DIR$/out/artifacts/GuessNumber</output-path>
+    <root id="archive" name="EntornosDAW.jar">
+      <element id="module-output" name="EntornosDAW" />
+    </root>
+  </artifact>
+</component>
