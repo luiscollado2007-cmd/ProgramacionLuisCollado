@@ -19,5 +19,10 @@ public class EjemplosArrayList {
         nombres.remove(4);
 
         System.out.println("¿Cuántos nombres hay?: " + nombres.size());
+
+        System.out.println("Mostramos todos los nombres: ");
+        for (String nombre : nombres){
+            System.out.println("El nombre es: " + nombre.toUpperCase());
+        }
     }
 }

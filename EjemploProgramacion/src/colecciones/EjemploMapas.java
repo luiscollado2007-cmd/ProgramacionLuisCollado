@@ -3,6 +3,7 @@ package colecciones;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 
 public class EjemploMapas {
     public static void main(String[] args) {
@@ -37,9 +38,13 @@ public class EjemploMapas {
         System.out.println("Tablita de notas por alumno:");
         for (String clave : mapaNotasPorAlumno.keySet()){
             Integer nota = mapaNotasPorAlumno.get(clave);
-
             System.out.println(clave + ": " + nota);
+        }
 
+        Set<Map.Entry<String,Integer>> entradasMapa = mapaNotasPorAlumno.entrySet();
+
+        for (Map.Entry<String,Integer> entrada : entradasMapa){
+            System.out.println(entrada);
         }
     }
 }
