@@ -17,6 +17,15 @@ public class EjemploRutas {
         System.out.println("La ruta padre es: " + rutaFichero.getParent());
 
         try {
+            if(Files.isRegularFile(rutaFichero)){
+                System.out.println("Es un fichero como tal");
+            }else if (Files.isDirectory(rutaFichero)){
+                System.out.println("Es un directorio");
+            }
+
+            if (!Files.exists(rutaFichero)){
+                System.out.println("El fichero no existe....");
+            }
             List<String> contenidoFichero = Files.readAllLines(rutaFichero);
 
             for (String linea : contenidoFichero){
