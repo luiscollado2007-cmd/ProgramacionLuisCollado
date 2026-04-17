@@ -1,32 +1,35 @@
 package ficheros;
 
-public class Producto {
-    private String id;
-    private String producto;
-    private double precio;
-    private double stock;
+import java.util.Objects;
 
-    public Producto(String id, String producto, double precio, double stock) {
+public class Producto {
+
+    private int id;
+    private String nombre;
+    private double precio;
+    private int stock;
+
+    public Producto(int id, String nombre, double precio, int stock) {
         this.id = id;
-        this.producto = producto;
+        this.nombre = nombre;
         this.precio = precio;
         this.stock = stock;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getProducto() {
-        return producto;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setProducto(String producto) {
-        this.producto = producto;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public double getPrecio() {
@@ -37,21 +40,33 @@ public class Producto {
         this.precio = precio;
     }
 
-    public double getStock() {
+    public int getStock() {
         return stock;
     }
 
-    public void setStock(double stock) {
+    public void setStock(int stock) {
         this.stock = stock;
     }
 
     @Override
     public String toString() {
         return "Producto{" +
-                "id='" + id + '\'' +
-                ", producto='" + producto + '\'' +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
                 ", precio=" + precio +
                 ", stock=" + stock +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Producto producto = (Producto) o;
+        return id == producto.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
     }
 }
