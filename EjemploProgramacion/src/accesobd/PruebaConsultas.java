@@ -3,6 +3,7 @@ package accesobd;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class PruebaConsultas {
 
@@ -17,15 +18,37 @@ public class PruebaConsultas {
         6. Crear una clase Categoria (campos id, nombre)
         7. Que el producto tenga un objeto de la clase Categoria
         8. Asignar la categoria y mostrarla cuand se muestre el producto
+        9. Montar una busqueda segun varios criterios: nombre producto, precio maximo y nombre categoria. Este ultimo, opcional
          */
+        System.out.println("Dime nombre de producto ");
+        Scanner teclado = new Scanner(System.in);
+        String filtroNombreProducto = teclado.nextLine();
 
-        try(Connection conexion = DriverManager.getConnection(ConstantesBD.URL, ConstantesBD.USER, ConstantesBD.PASS);
-            PreparedStatement sentenciaConsulta = conexion.prepareStatement("SELECT * FROM productos where precio > ?");
+        System.out.println("Dime filtro de precio máximo ");
+        double filtroPrecioMax = teclado.nextDouble();
+        teclado.nextLine();
+
+        System.out.println("Dime nombre de categoría (si no quieres, pulsa enter)");
+        String filtroCategoria = teclado.nextLine();
+        boolean existeCategoria = (filtroCategoria != null && !filtroCategoria.isEmpty());
+
+        String consulta = "select p.*, c.nombre as nombre_categoria from daw_tienda.productos p join daw_tienda.categorias c on c.id_categoria = p.id_categoria  " +
+                " where precio <=  ? and p.nombre like ? ";
+        if(existeCategoria){
+            consulta += " and c.nombre like ? ";
+        }
+
+        try(Connection conexion = DriverManager.getConnection(ConstantesBd.URL, ConstantesBd.USER, ConstantesBd.PASS);
+            PreparedStatement sentenciaConsulta = conexion.prepareStatement(consulta);
         ){
 
-            double precioFiltro = 100;
+            sentenciaConsulta.setDouble(1, filtroPrecioMax);
+            sentenciaConsulta.setString(2, "%" + filtroNombreProducto + "%");
+            //Si se ha puesto categoria, tenemos que añadir el parametro. Si no, no.
+            if(existeCategoria){
+                sentenciaConsulta.setString(3, "%" + filtroCategoria + "%");
+            }
 
-            sentenciaConsulta.setDouble(1, precioFiltro);
             ResultSet conjuntoResultado = sentenciaConsulta.executeQuery();
 
             List<Producto> productosBd = new ArrayList<>();
@@ -38,8 +61,10 @@ public class PruebaConsultas {
                 int stock = conjuntoResultado.getInt("stock");
                 boolean activo = conjuntoResultado.getBoolean("activo");
                 int idCategoria = conjuntoResultado.getInt("id_categoria");
+                String nombreCategoria = conjuntoResultado.getString("nombre_categoria");
 
-                Producto nuevo = new Producto(idProducto, nombreProducto, precioProducto,stock, activo);
+                Categoria catProducto = new Categoria(idCategoria, nombreCategoria);
+                Producto nuevo = new Producto(idProducto, nombreProducto, precioProducto,stock, activo, catProducto);
                 productosBd.add(nuevo);
 //
             }
