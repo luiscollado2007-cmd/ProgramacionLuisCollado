@@ -38,7 +38,7 @@ public class PruebaConsultas {
             consulta += " and c.nombre like ? ";
         }
 
-        try(Connection conexion = DriverManager.getConnection(ConstantesBd.URL, ConstantesBd.USER, ConstantesBd.PASS);
+        try(Connection conexion = DriverManager.getConnection(ConstantesBD.URL, ConstantesBD.USER, ConstantesBD.PASS);
             PreparedStatement sentenciaConsulta = conexion.prepareStatement(consulta);
         ){
 
@@ -64,7 +64,7 @@ public class PruebaConsultas {
                 String nombreCategoria = conjuntoResultado.getString("nombre_categoria");
 
                 Categoria catProducto = new Categoria(idCategoria, nombreCategoria);
-                Producto nuevo = new Producto(idProducto, nombreProducto, precioProducto,stock, activo, catProducto);
+                Producto nuevo = new Producto(idProducto, nombreProducto, precioProducto,stock, activo,catProducto);
                 productosBd.add(nuevo);
 //
             }
