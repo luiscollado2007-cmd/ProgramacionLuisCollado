@@ -16,6 +16,9 @@ public class Producto {
         this.activo = activo;
     }
 
+    public Producto(int id, String nombre, String des, double precio) {
+    }
+
     public void mostrarProducto() {
         String lineaProducto = "\t - ID: %d | Nombre: %s | Precio: %f | Stock: %d | Activo: %s";
 
