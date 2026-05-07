@@ -22,7 +22,7 @@ public class PruebaPersonaEstaticos {
 
         /// otra.ingresar(500, "Nomina");
 
-        System.out.println("Nuym total morosos: " + CuentaBancaria.NUMERO_TOTAL_MOROSOS);
+        System.out.println("Num total morosos: " + CuentaBancaria.NUMERO_TOTAL_MOROSOS);
 
 
 
