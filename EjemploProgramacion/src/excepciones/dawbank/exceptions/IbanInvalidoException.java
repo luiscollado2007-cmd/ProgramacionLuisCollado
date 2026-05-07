@@ -1,4 +1,4 @@
-package excepciones.dawbank;
+package excepciones.dawbank.exceptions;
 
 public class IbanInvalidoException extends Exception{
 

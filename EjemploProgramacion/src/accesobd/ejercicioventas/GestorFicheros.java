@@ -1,10 +1,7 @@
 package accesobd.ejercicioventas;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,8 +24,14 @@ public class GestorFicheros {
 
             System.out.println("Relación de ventas por producto exportado correctamente en: " + rutaFichero);
 
+        }catch (NoSuchFileException e) {
+            System.err.println("Ese fichero no existe");
+        }catch (AccessDeniedException e){
+            System.err.println("No tienes permisos para manejar ese fichero");
         } catch (IOException e) {
             System.err.println("No hemos podido exportar el fichero. Más información: " + e);
+        }catch (Exception e){
+            System.err.println("No se lo que ha pasado pero ha fallado: " +e);
         }
     }
 

@@ -1,8 +1,14 @@
 package excepciones.dawbank;
 
-import java.util.Scanner;
+import excepciones.dawbank.exceptions.CuentaException;
+import excepciones.dawbank.exceptions.IbanInvalidoException;
 
+import java.util.Scanner;
+//ES6112343456420456323532
 public class DawBank {
+
+    public static String ROJO = "\u001B[31m";
+    public static String RESET = "\u001B[0m";
     public static void main(String[] args)  {
         Scanner sc = new Scanner(System.in);
 
@@ -30,8 +36,15 @@ public class DawBank {
                 datosValidos = true;
 
             } catch (IbanInvalidoException e) {
-                System.out.println("Error al crear cuenta con iban invalido: " + e.getIbanInvalido());
+                System.out.println(ROJO + "Error al crear cuenta con iban invalido: " + e.getIbanInvalido() + RESET);
+            } catch (CuentaException e){
+                System.out.println(ROJO + "Error al crear cuenta: " + e.getMessage() + RESET);
             }
+
+            if(!datosValidos){
+                System.out.println(" (Por favor, inténtelo de nuevo)");
+            }
+
         }while (!datosValidos);
 
         int opcion;
@@ -65,10 +78,14 @@ public class DawBank {
                     System.out.print("¿Qué ponemos en el concepto?: ");
                     String conceptoIngresar = sc.nextLine();
 
-                    if (cuenta.ingresar(importe, conceptoIngresar)) {
-                        System.out.println("Ingreso realizado.");
-                    } else {
-                        System.out.println("Error en el ingreso.");
+                    try {
+                        if (cuenta.ingresar(importe, conceptoIngresar)) {
+                            System.out.println("Ingreso realizado.");
+                        } else {
+                            System.out.println("Error en el ingreso.");
+                        }
+                    }catch (CuentaException cuentaEx){
+                        System.err.println("Error al ingresar: " + cuentaEx.getMessage());
                     }
                     break;
                 case 6:
@@ -77,10 +94,14 @@ public class DawBank {
                     sc.nextLine();
                     System.out.print("¿Qué ponemos en el concepto?: ");
                     String conceptoRetirada = sc.nextLine();
-                    if (cuenta.retirar(importeRetirada, conceptoRetirada)) {
-                        System.out.println("Retirada realizada.");
-                    } else {
-                        System.out.println("Saldo insuficiente o cantidad inválida.");
+                    try{
+                        if (cuenta.retirar(importeRetirada, conceptoRetirada)) {
+                            System.out.println("Retirada realizada.");
+                        } else {
+                            System.out.println("Saldo insuficiente o cantidad inválida.");
+                        }
+                    }catch (CuentaException cuentaEx){
+                        System.err.println("Error al retirar: " + cuentaEx.getMessage());
                     }
                     break;
                 case 7:
